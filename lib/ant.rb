@@ -10,14 +10,14 @@ require 'rest-client'
 
 module Ant
 
-  module COINS
+  class Coins
     BTC = 'BTC'
     LTC = 'LTC'
     ETH = 'ETH'
     ZEC = 'ZEC'
   end
 
-  module PAYMENT_TYPE
+  class PaymentType
     PAYOUT = 'payout'
     PPS = 'PPS'
     PPLNS = 'PPLNS'
@@ -50,23 +50,23 @@ module Ant
       end
     end
 
-    def account(coin = COINS.BTC)
+    def account(coin = Coins::BTC)
       self.api_call('account.htm', { :coin => coin }, true)
     end
 
-    def hashrate(coin = COINS.BTC)
+    def hashrate(coin = Coins::BTC)
       self.api_call('hashrate.htm', { :coin => coin }, true)
     end
 
-    def pool_stats(coin = COINS.BTC)
+    def pool_stats(coin = Coins::BTC)
       self.api_call('poolStats.htm', { :coin => coin }, true)
     end
 
-    def workers(coin = COINS.BTC, pageEnable = 1, page = 1, pageSize = 10)
+    def workers(coin = Coins::BTC, pageEnable = 1, page = 1, pageSize = 10)
       self.api_call('workers.htm', { :coin => coin, :pageEnable => pageEnable, :page => page, :pageSize => pageSize }, true)
     end
 
-    def payment_history(coin = COINS.BTC, type = PAYMENT_TYPE.PAYOUT, pageEnable = 1, page = 1, pageSize = 10)
+    def payment_history(coin = Coins::BTC, type = PaymentType::PAYOUT, pageEnable = 1, page = 1, pageSize = 10)
       self.api_call('paymentHistory.htm', { :coin => coin, :type => type, :pageEnable => pageEnable, :page => page, :pageSize => pageSize }, true)
     end
 
