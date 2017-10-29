@@ -76,7 +76,7 @@ module Ant
 
     def signature
       str = self.username + self.api_key + self.nonce_v
-      OpenSSL::HMAC.hexdigest(OpenSSL::Digest::Digest.new('sha256'), self.api_secret ,str)
+      OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('sha256'), self.api_secret, str)
     end
 
     def post(url, param)
