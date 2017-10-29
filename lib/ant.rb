@@ -10,6 +10,20 @@ require 'rest-client'
 
 module Ant
 
+  module COINS
+    BTC = 'BTC'
+    LTC = 'LTC'
+    ETH = 'ETH'
+    ZEC = 'ZEC'
+  end
+
+  module PAYMENT_TYPE
+    PAYOUT = 'payout'
+    PPS = 'PPS'
+    PPLNS = 'PPLNS'
+    P2P = 'P2P'
+  end
+
   class API
     attr_accessor :api_key, :username, :nonce_v, :api_secret
 
@@ -36,12 +50,24 @@ module Ant
       end
     end
 
-    def account
-      self.api_call('account.htm', {}, true)
+    def account(coin = COINS.BTC)
+      self.api_call('account.htm', { :coin => coin }, true)
     end
 
-    def hashrate
-      self.api_call('hashrate.htm', {}, true)
+    def hashrate(coin = COINS.BTC)
+      self.api_call('hashrate.htm', { :coin => coin }, true)
+    end
+
+    def pool_stats(coin = COINS.BTC)
+      self.api_call('poolStats.htm', { :coin => coin }, true)
+    end
+
+    def workers(coin = COINS.BTC, pageEnable = 1, page = 1, pageSize = 10)
+      self.api_call('workers.htm', { :coin => coin, :pageEnable => pageEnable, :page => page, :pageSize => pageSize }, true)
+    end
+
+    def payment_history(coin = COINS.BTC, type = PAYMENT_TYPE.PAYOUT, pageEnable = 1, page = 1, pageSize = 10)
+      self.api_call('paymentHistory.htm', { :coin => coin, :type => type, :pageEnable => pageEnable, :page => page, :pageSize => pageSize }, true)
     end
 
     def nonce
